@@ -1,0 +1,19 @@
+project:
+  type: website
+  output-dir: docs
+website:
+  title: "Wen Chi's blog"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/Wen2429/health-data-science-blog.git
+      - icon: twitter
+        href: https://twitter.com
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+
+editor: visual
+
