@@ -9,7 +9,7 @@
 <meta name="author" content="Wen Chi">
 <meta name="dcterms.date" content="2025-06-16">
 
-<title>Wen Chi’s blog - fixed effect vs.&nbsp;random effect</title>
+<title>Health Data Science blog - Wen2429 - Fixed effect vs.&nbsp;Random effect</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Wen Chi’s blog</span>
+    <span class="navbar-title">Health Data Science blog - Wen2429</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -149,7 +149,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">fixed effect vs.&nbsp;random effect</h1>
+      <h1 class="title">Fixed effect vs.&nbsp;Random effect</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">notes</div>
                 <div class="quarto-category">code</div>
@@ -215,7 +215,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>m5 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> X1<span class="sc">*</span>W <span class="sc">+</span> X2 <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> X1 <span class="sc">|</span> group), ...) <span class="co"># W is a Level 2 explanatory variable, and X1*W is a cross-layer interaction</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><img src="images/clipboard-3083561765.png" class="img-fluid"></p>
 <p>In general, random intercepts are considered whenever HLM is used. So, when discussing FE or RE in the framework of HLM, it is more about whether the “slope” is fixed or random.</p>
-<p>So when to use a fixed slope versus a random slope? There are four main considerations:</p>
+<p>So when to use a fixed slope versus a random slope?</p>
+<p>There are four main considerations:</p>
 <ol type="1">
 <li>Theoretical assumptions: We generally don’t assume a random slope, which means that setting a random slope requires a strong theoretical assumption that the effect of the Level 1 variable varies by group. This can also be tested statistically, and if the random part of the slope (the variance component) is not significantly different from zero, you might consider discarging the random slope.</li>
 <li>Purpose: If the purpose of our study is to test for cross-layer interactions, then the corresponding Level 1 independent variables need to be set to random slopes. This makes sense because the cross-layer interaction itself implies that the slope of X will change, and we want to explain why it will change, if you don’t set a random slope, wouldn’t you contradict yourself?</li>

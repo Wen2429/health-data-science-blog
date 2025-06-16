@@ -1,8 +1,8 @@
 ---
-title: " Multilevel Modelling,MLM "
+title: " Multilevel Modelling, MLM "
 author: "Wen Chi"
 date: "2025-06-16"
-categories: [notes]
+categories: [notes, analysis]
 ---
 
 MLM also has some synonyms or derivative models in different fields:
