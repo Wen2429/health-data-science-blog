@@ -1,12 +1,40 @@
 ---
-title: "Welcome To My Blog"
-author: "Tristan O'Malley"
-date: "2025-06-09"
-categories: [news]
+title: " Multilevel Modelling,MLM "
+author: "Wen Chi"
+date: "2025-06-16"
+categories: [notes]
 ---
 
-This is the first post in a Quarto blog. Welcome!
+MLM also has some synonyms or derivative models in different fields:
 
-![](thumbnail.jpg)
+-   Hierarchical Linear Model,HLM
 
-Since this post doesn't specify an explicit `image`, the first image in the post will be used in the listing page of posts.
+-   Linear Mixed Model
+
+-   Mixed Effects Model
+
+-   Random Effects Model
+
+-   Random Coefficients Model
+
+-   Variance Components Model
+
+-   Growth Curve Model
+
+Regression analysis is the basis of almost all statistical models, and the most general form of regression analysis can be classified as the multilevel linear model HLM.
+
+-   The t-test is a special case of ANOVA (the independent variable has only two levels)
+
+-   ANOVA is a special case of regression analysis (independent variables are categorical variables)
+
+-   The essence of regression analysis is the general linear model GLM (generalized linear model by extension)
+
+-   GLM is a special case of HLM (Level 1 only)
+
+-   Meta-analysis can be viewed as HLM with only group models (Level 2 only)
+
+Distinguish "multilevel linear models" from "hierarchical/stepwise multiple regression" :
+
+-   Multilevel linear model solves multi-layer nested structure data (the end point is the data structure)
+
+-   Hierarchical/stepwise multiple regression itself is an ordinary regression analysis, which solves the priority of the importance of different independent variables (the goal is the importance of variables).

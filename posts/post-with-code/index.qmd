@@ -1,13 +1,47 @@
 ---
-title: "Post With Code"
-author: "Harlow Malloc"
-date: "2025-06-12"
-categories: [news, code, analysis]
-image: "image.jpg"
+title: "fixed effect vs. random effect"
+author: "Wen Chi"
+date: "2025-06-16"
+categories: [notes, code, analysis]
 ---
 
-This is a post with executable code.
+![FE and RE are too general for HLM, and HLM has a more detailed division:](images/clipboard-2471037466.png)
 
-```{r}
-1 + 1
+-   fixed intercept: The fixed intercept does not actually exist in the HLM model, but rather "relegates" to a general least squares regression (OLS), which is the most commonly used GLM regression analysis.
+
+``` r
+m1 <- lm(Y ~ 1 + X1 + X2, ...)
 ```
+
+-   random intercept: When doing HLM, it is common to set the intercept to be random, that is, to allow different groups to have their own intercept (baseline level). Some people are born at the end, while you are born at the beginning. In R, as long as you put parentheses after a regression expression ( instead of using 'lm', use the 'lmer' function from the 'lme4' and 'lmerTest' packages), The parentheses define the random part of the Level 1 intercept or slope at Level 2. (The random part of Level 1 is the individual residual, which we don't have to define.) After the vertical bar "\|" is the clustering/grouping variable (which can be a province or school, or an individual in a repeated measures or tracking design), the 1 in front of the vertical bar is the random intercept, and the variable name is the random slope associated with that variable.
+
+``` r
+m2 <- lmer(Y ~ 1 + X1 + X2 + (1 | group), ...)
+```
+
+-   fixed slope: A fixed slope means that the slope of a Level 1 variable is consistent across groups. Although this may not be true, the researcher can assume and test whether the slopes are consistent across groups and not significantly different. Note that there is no distinction between fixed and random (or both) Level 2 intercepts or slopes, unless there is also Level 3.
+
+``` r
+m3 <- lmer(Y ~ 1 + X1 + X2 + (1 | group), ...)
+```
+
+-   random slope: As opposed to a fixed slope, a random slope means that the slope of a Level 1 variable varies across groups, or "by group." Some people spend two hours to make 10,000 yuan, but you only make 10 yuan. You can either include the random slope component without explaining the difference in slope, or you can include a Level 2 variable that interacts with the Level 1 variable (i.e., a cross-layer interaction) to explain why the effect of X varies by group and what causes the change.
+
+``` r
+m4 <- lmer(Y ~ 1 + X1 + X2 + (1 + X1 | group), ...) # We can omit the 1's, as they are included in the intercept by default (except for random intercepts)
+```
+
+``` r
+m5 <- lmer(Y ~ 1 + X1*W + X2 + (1 + X1 | group), ...) # W is a Level 2 explanatory variable, and X1*W is a cross-layer interaction
+```
+
+![](images/clipboard-3083561765.png)
+
+In general, random intercepts are considered whenever HLM is used. So, when discussing FE or RE in the framework of HLM, it is more about whether the "slope" is fixed or random.
+
+So when to use a fixed slope versus a random slope? There are four main considerations:
+
+1.  Theoretical assumptions: We generally don't assume a random slope, which means that setting a random slope requires a strong theoretical assumption that the effect of the Level 1 variable varies by group. This can also be tested statistically, and if the random part of the slope (the variance component) is not significantly different from zero, you might consider discarging the random slope.
+2.  Purpose: If the purpose of our study is to test for cross-layer interactions, then the corresponding Level 1 independent variables need to be set to random slopes. This makes sense because the cross-layer interaction itself implies that the slope of X will change, and we want to explain why it will change, if you don't set a random slope, wouldn't you contradict yourself?
+3.  Number of groups at Level 2: If the number of groups at Level 2 is too small (e.g., \<10 groups), then the freedom at Level 2 is too small to make robust parameter estimates, so a fixed slope is more appropriate. -- BUT! If the number of groups at Level 2 is really less than 10, we might even want to think twice about using HLM! Because the Level 2 group is also a kind of random sampling, we generally require the sample size to be at least 10 times the number of variables in GLM, and we also require the group size to be not too small in HLM, and generally require the Level 2 group to be at least 10-20 groups. Otherwise, the statistical test power of the Level 2 model will be seriously insufficient! This is the same as GLM! So, if we don't have more than 10 samples, it's probably best not to use the HLM, in which case we use what's called a "fixed intercept" model, which downscales to GLM/ANOVA/ANCOVA!
+4.  Level 2 Sample Size within each group: Reminiscent of the classic between-subjects design ANOVA, we generally require a sample size of at least 30-50 participants per group to ensure power. The same point applies to HLM. If the sample size within each group at Level 2 is too small (e.g., \<30), you can still use HLM, but you'll need more or all of the data to get robust parameter estimates, so a random slope is more appropriate.
