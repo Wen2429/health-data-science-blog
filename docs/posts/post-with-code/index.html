@@ -9,7 +9,7 @@
 <meta name="author" content="Wen Chi">
 <meta name="dcterms.date" content="2025-06-16">
 
-<title>Health Data Science blog - Wen2429 - Fixed effect vs.&nbsp;Random effect</title>
+<title>Health Data Science Blog - Wen2429 - Fixed effect vs.&nbsp;Random effect</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Health Data Science blog - Wen2429</span>
+    <span class="navbar-title">Health Data Science Blog - Wen2429</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -220,7 +220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Theoretical assumptions: We generally don’t assume a random slope, which means that setting a random slope requires a strong theoretical assumption that the effect of the Level 1 variable varies by group. This can also be tested statistically, and if the random part of the slope (the variance component) is not significantly different from zero, you might consider discarging the random slope.</li>
 <li>Purpose: If the purpose of our study is to test for cross-layer interactions, then the corresponding Level 1 independent variables need to be set to random slopes. This makes sense because the cross-layer interaction itself implies that the slope of X will change, and we want to explain why it will change, if you don’t set a random slope, wouldn’t you contradict yourself?</li>
-<li>Number of groups at Level 2: If the number of groups at Level 2 is too small (e.g., &lt;10 groups), then the freedom at Level 2 is too small to make robust parameter estimates, so a fixed slope is more appropriate. – BUT! If the number of groups at Level 2 is really less than 10, we might even want to think twice about using HLM! Because the Level 2 group is also a kind of random sampling, we generally require the sample size to be at least 10 times the number of variables in GLM, and we also require the group size to be not too small in HLM, and generally require the Level 2 group to be at least 10-20 groups. Otherwise, the statistical test power of the Level 2 model will be seriously insufficient! This is the same as GLM! So, if we don’t have more than 10 samples, it’s probably best not to use the HLM, in which case we use what’s called a “fixed intercept” model, which downscales to GLM/ANOVA/ANCOVA!</li>
+<li>Number of groups at Level 2: If the number of groups at Level 2 is too small (e.g., &lt;10 groups), then the freedom at Level 2 is too small to make robust parameter estimates, so a fixed slope is more appropriate. – BUT! If the number of groups at Level 2 is really less than 10, we might even want to think twice about using HLM! Because the Level 2 group is also a kind of random sampling, we generally require the sample size to be at least 10 times the number of variables in GLM, and we also require the group size to be not too small in HLM, and generally require the Level 2 group to be at least 10-20 groups. Otherwise, the statistical test power of the Level 2 model will be seriously insufficient! This is the same as GLM! So, if we don’t have more than 10 samples, it’s probably best not to use the HLM, in which case we use what’s called a “fixed intercept” model, which downscales to GLM/ANOVA/ANCOVA！</li>
 <li>Level 2 Sample Size within each group: Reminiscent of the classic between-subjects design ANOVA, we generally require a sample size of at least 30-50 participants per group to ensure power. The same point applies to HLM. If the sample size within each group at Level 2 is too small (e.g., &lt;30), you can still use HLM, but you’ll need more or all of the data to get robust parameter estimates, so a random slope is more appropriate.</li>
 </ol>
 

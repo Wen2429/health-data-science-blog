@@ -2,7 +2,7 @@ project:
   type: website
   output-dir: docs
 website:
-  title: "Health Data Science blog - Wen2429"
+  title: "Health Data Science Blog - Wen2429"
   navbar:
     right:
       - about.qmd
